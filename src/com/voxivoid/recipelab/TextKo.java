@@ -163,7 +163,7 @@ final class TextKo {
         { "about_platform", "플랫폼" },
         { "about_source", "소스" },
         { "about_based", "based on" },
-        { "about_love", "이 앱이 마음에 드시나요? 후원해 주세요!" },
+        { "about_original", "original" },
         { "dev_title", "개발 도구" },
         { "dev_settings_snapshot", "설정 스냅샷" },
         { "dev_settings_diff", "설정 차이" },

@@ -163,7 +163,7 @@ final class TextVi {
         { "about_platform", "nền tảng" },
         { "about_source", "mã nguồn" },
         { "about_based", "based on" },
-        { "about_love", "Thích ứng dụng này? Hãy tip cho chúng tôi!" },
+        { "about_original", "original" },
         { "dev_title", "CÔNG CỤ DEV" },
         { "dev_settings_snapshot", "Ảnh chụp cài đặt" },
         { "dev_settings_diff", "So sánh cài đặt" },

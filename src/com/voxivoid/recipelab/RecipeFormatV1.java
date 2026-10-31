@@ -30,7 +30,7 @@ final class RecipeFormatV1 implements RecipeFormat {
     // ------------------------------------------------------------ writing
     public String write(Recipes.Recipe r, String madeOn) {
         StringBuilder s = new StringBuilder();
-        s.append("# Recipe Lab custom recipe. Keep it in the ").append(CustomRecipes.DIR).append(" folder of a memory card, under a name of\n");
+        s.append("# Darkroom custom recipe. Keep it in the ").append(CustomRecipes.DIR).append(" folder of a memory card, under a name of\n");
         s.append("# up to eight letters or digits and .YML: the camera reads no longer file names. Its own name is below.\n");
         s.append("# Edit with care: a value outside the range beside it makes the app skip this file.\n");
         line(s, "format", String.valueOf(version()), null);

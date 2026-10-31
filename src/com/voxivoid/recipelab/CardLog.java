@@ -33,7 +33,7 @@ final class CardLog {
     private CardLog() {}
 
     /** the app's folder at the root of the card: RECIPE-LAB would be ten characters, past what the card takes */
-    static final String DIR = "RECIPLAB";
+    static final String DIR = "DARKROOM";
     static final String SUB = "LOGS";
     static final String LOG = "LOG.TXT", DIFF = "DIFF.TXT", KEYS = "KEYS.TXT", LOCKS = "LOCKS.TXT", PARAMS = "PARAMS.TXT";
     /** about a thousand lines; the rolled-over file keeps as many again */
@@ -204,7 +204,7 @@ final class CardLog {
      * Cheap: it only runs when the user asks for it, and reads at most about 100 KB.
      */
     static String report(File logs, String now, String header, String app, String state, String flat) {
-        StringBuilder sb = new StringBuilder("Recipe Lab report: attach this file to your GitHub issue.\n")
+        StringBuilder sb = new StringBuilder("Darkroom report: attach this file to a GitHub issue of the fork.\n")
                 .append("saved ").append(now).append('\n').append(header).append('\n').append(app).append('\n')
                 .append("STATE ").append(state).append('\n');
         section(sb, "LOG", tail(new File(logs, older(LOG)), new File(logs, LOG), REPORT_LOG));

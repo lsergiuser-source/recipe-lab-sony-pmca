@@ -59,7 +59,7 @@ sed -e "s/android:versionCode=\"[^\"]*\"/android:versionCode=\"$VERSION_CODE\"/"
     AndroidManifest.xml > "$MANIFEST"
 
 echo "[1/7] aapt R.java"
-"$BT/aapt" package -f -m -J out/gen -M "$MANIFEST" -S res -A assets -I "$AJ"
+"$BT/aapt" package -f -m --custom-package com.voxivoid.recipelab -J out/gen -M "$MANIFEST" -S res -A assets -I "$AJ"
 echo "[2/7] javac"
 "$JAVA/javac" -encoding UTF-8 --release 8 -Xlint:-options -cp "$AJ" -d out/classes \
   out/gen/com/voxivoid/recipelab/R.java src/com/voxivoid/recipelab/*.java src/com/voxivoid/recipelab/transfer/*.java

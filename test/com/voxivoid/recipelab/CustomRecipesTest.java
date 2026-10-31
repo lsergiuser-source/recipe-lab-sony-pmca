@@ -56,7 +56,7 @@ class CustomRecipesTest {
 
     @Test void theFileReadsLikeTheChips() {
         String text = RecipeFormats.write(mine("Golden Hour", "Kodak Vision 200T (Asteroid City)"), "ILCE-6000");
-        assertTrue(text.startsWith("# Recipe Lab custom recipe"), text);
+        assertTrue(text.startsWith("# Darkroom custom recipe"), text);
         for (String line : new String[] { "format: 1", "name: \"Golden Hour\"", "made-on: \"ILCE-6000\"", "style: neutral",
                 "saturation: -2", "contrast: -3", "effect: off", "white-balance: 5000K", "amber-blue: +2",
                 "green-magenta: +3", "exposure: +0.3", "dro: 3" })
@@ -99,7 +99,7 @@ class CustomRecipesTest {
     @Test void aFileWithoutAFormatIsFormatOne() { assertEquals("Old", parse("name: Old\nstyle: mono").name); }
 
     @Test void aNewerFormatIsSkippedNotHalfRead() {
-        assertEquals("made by a newer Recipe Lab (format 2)", error("format: 2\nname: Future\nstyle: mono"));
+        assertEquals("made by a newer Darkroom (format 2)", error("format: 2\nname: Future\nstyle: mono"));
     }
 
     @Test void aFormatThatIsNotANumberIsRefused() {
@@ -319,7 +319,7 @@ class CustomRecipesTest {
         CustomRecipes.Loaded l = CustomRecipes.load(dir);
         assertEquals(1, l.entries.size());
         assertEquals("Good", l.entries.get(0).recipe.name);
-        assertEquals(Arrays.asList("bad.YML: saturation: 9 is not allowed", "future.YML: made by a newer Recipe Lab (format 7)",
+        assertEquals(Arrays.asList("bad.YML: saturation: 9 is not allowed", "future.YML: made by a newer Darkroom (format 7)",
                 "huge.YML: too large to be a recipe"), l.skipped);
         assertEquals("Skipped 3 files — first bad.YML: saturation: 9 is not allowed", CustomRecipes.skippedMessage(l.skipped));
         assertEquals("Skipped bad.YML: x", CustomRecipes.skippedMessage(Arrays.asList("bad.YML: x")));

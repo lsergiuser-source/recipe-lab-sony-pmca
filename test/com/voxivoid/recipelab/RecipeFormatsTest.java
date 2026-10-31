@@ -51,8 +51,8 @@ class RecipeFormatsTest {
     }
 
     @Test void aVersionThisBuildDoesNotKnowIsSkippedWhole() {
-        assertEquals("made by a newer Recipe Lab (format 2)", RecipeFormats.parse("format: 2\ntitle: x\n", "x.YML").error);
-        assertEquals("made by a newer Recipe Lab (format 3)", RecipeFormats.parse("format: 3\n", "x.YML", WITH_V2).error);
+        assertEquals("made by a newer Darkroom (format 2)", RecipeFormats.parse("format: 2\ntitle: x\n", "x.YML").error);
+        assertEquals("made by a newer Darkroom (format 3)", RecipeFormats.parse("format: 3\n", "x.YML", WITH_V2).error);
         assertEquals("format: 0 is not allowed", RecipeFormats.parse("format: 0\n", "x.YML").error);
         assertEquals("format: two is not allowed", RecipeFormats.parse("format: two\n", "x.YML").error);
     }

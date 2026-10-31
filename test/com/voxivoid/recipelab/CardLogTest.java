@@ -24,7 +24,7 @@ class CardLogTest {
     @Test void folderAndFileNamesAreDos83() {
         for (String n : new String[] { CardLog.DIR, CardLog.SUB }) assertTrue(n.length() <= 8 && n.equals(n.toUpperCase()), n);
         for (String n : new String[] { CardLog.LOG, CardLog.DIFF, CardLog.KEYS, CardLog.LOCKS, CardLog.PARAMS, CardLog.older(CardLog.LOG), CardLog.older(CardLog.LOCKS) }) assertTrue(n.matches("[A-Z0-9]{1,8}\\.[A-Z]{1,3}"), n);
-        assertEquals("RECIPLAB/LOGS/LOG.TXT", CardLog.path(CardLog.LOG));
+        assertEquals("DARKROOM/LOGS/LOG.TXT", CardLog.path(CardLog.LOG));
     }
 
     @Test void noCardNoFolder() {
@@ -36,7 +36,7 @@ class CardLogTest {
         File dir = CardLog.dir(root);
         CardLog.append(dir, CardLog.LOG, "one\n");
         CardLog.append(dir, CardLog.LOG, "two\n");
-        assertEquals(new File(new File(root, "RECIPLAB"), "LOGS"), dir);
+        assertEquals(new File(new File(root, "DARKROOM"), "LOGS"), dir);
         assertEquals("one\ntwo\n", read(new File(dir, CardLog.LOG)));
     }
 
@@ -171,7 +171,7 @@ class CardLogTest {
         CardLog.append(dir, CardLog.LOG, "opened\n");
         CardLog.append(dir, CardLog.KEYS, "down 232\n");
         String r = CardLog.report(dir, "2026-10-15 14:03:27", "model ILCE-6000", "recipe Velvia  ACTIVE", "STYLE=1", "scene-mode=manual-exposure;color-mode=mono");
-        assertTrue(r.startsWith("Recipe Lab report"), r);
+        assertTrue(r.startsWith("Darkroom report"), r);
         assertTrue(r.contains("model ILCE-6000\nrecipe Velvia  ACTIVE\nSTATE STYLE=1\n"), r);
         assertTrue(r.contains("===== LOG =====\nopened\n"), r);
         assertTrue(r.contains("===== KEYS =====\ndown 232\n"), r);
@@ -180,7 +180,7 @@ class CardLogTest {
     }
 
     @Test void theReportGoesBesideTheLogs() {
-        assertEquals(new File(root, "RECIPLAB"), CardLog.reportDir(root));
+        assertEquals(new File(root, "DARKROOM"), CardLog.reportDir(root));
         assertNull(CardLog.reportDir(null));
         assertTrue(CardLog.REPORT.matches("[A-Z0-9]{1,8}\\.[A-Z]{1,3}"));
     }

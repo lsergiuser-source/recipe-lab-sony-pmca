@@ -243,19 +243,15 @@ class DevToolsTest {
     // ---- About
     @Test void aboutShowsVersionCameraFirmwarePlatformAndSource() {
         String[][] a = DevTools.about("9.8.7", null, "3.21", "");
-        assertEquals(6, a.length, "the facts and the attribution; the sponsor ask is the footer");
+        assertEquals(7, a.length, "the facts, the attribution and the original");
         assertEquals("version", a[0][0]); assertEquals("9.8.7", a[0][1]);
         assertEquals("camera", a[1][0]); assertEquals("unknown", a[1][1], "no model from the camera");
         assertEquals("firmware", a[2][0]); assertEquals("3.21", a[2][1]);
         assertEquals("platform", a[3][0]); assertEquals("unknown", a[3][1], "an empty platform string");
-        assertEquals("source", a[4][0]);
+        assertEquals("source", a[4][0]); assertEquals("github.com/lsergiuser-source/recipe-lab-sony-pmca", a[4][1]);
         assertEquals("based on", a[5][0]); assertEquals("Recipe Lab by André Domingues", a[5][1], "the original's GPL section 7(b) attribution");
+        assertEquals("original", a[6][0]); assertEquals("github.com/voxivoid/recipe-lab-sony-pmca", a[6][1]);
         assertEquals("unknown", DevTools.about(null, null, null, null)[2][1], "no firmware from the camera");
-        String[] f = DevTools.aboutFooter();
-        assertEquals("Love this app? Leave a tip!", f[0], "the README's ask");
-        assertEquals("ko-fi.com/voxivoid", f[1], "Ko-fi first: no GitHub account needed");
-        assertEquals("github.com/sponsors/voxivoid", f[2]);
-        assertEquals("Love this app? Leave a tip!  ko-fi.com/voxivoid", DevTools.sponsorLine(), "the live view's line");
         assertEquals("ILCE-6000", DevTools.about(null, "ILCE-6000", null, "2.4")[1][1]);
     }
 

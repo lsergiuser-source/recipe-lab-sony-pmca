@@ -94,7 +94,6 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback {
     private boolean transferSync;                               // the page was opened as Sync recipes: same link, its own words
     private Keys.Caps caps = Keys.Caps.UNKNOWN;                 // the shortcut keys this body reports (KeyProbe)
     private HintBar hints;
-    private SponsorLine sponsor;
     private LinearLayout chips;
     private final TextView[] chipLabel = new TextView[N], chipValue = new TextView[N];
     private final View[] chip = new View[N];
@@ -161,7 +160,6 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback {
         count = (TextView) findViewById(R.id.count);
         meta = (TextView) findViewById(R.id.meta);
         hints = (HintBar) findViewById(R.id.hints);
-        sponsor = (SponsorLine) findViewById(R.id.sponsor);
         mini = (TextView) findViewById(R.id.mini);
         toast = (TextView) findViewById(R.id.toast);
         prompt = (PromptView) findViewById(R.id.prompt);
@@ -186,7 +184,7 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback {
         });
     }
 
-    // ------------------------------------------------------------ the shareable log on the card (RECIPLAB/LOGS)
+    // ------------------------------------------------------------ the shareable log on the card (DARKROOM/LOGS)
     /** the card's root; null when no card is in or the camera will not say */
     private static File cardRoot() {
         try { return Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()) ? Environment.getExternalStorageDirectory() : null; }
@@ -227,7 +225,7 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback {
     }
 
     /**
-     * Hold MENU → Save report: one file, RECIPLAB/REPORT.TXT, with everything a bug report needs — the camera as it is
+     * Hold MENU → Save report: one file, DARKROOM/REPORT.TXT, with everything a bug report needs — the camera as it is
      * now and the end of every log — so a user attaches one thing. Replaced on every save.
      */
     private void saveReport() {
@@ -307,7 +305,7 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback {
         Lang.use(Lang.resolve(langChoice, l == null ? null : l.getLanguage(), l == null ? null : l.getCountry()));
         Typeface tf = UiFont.of(this, Lang.current());
         UiFont.apply(findViewById(android.R.id.content), tf);
-        picker.setTypeface(tf); prompt.setTypeface(tf); menu.setTypeface(tf); hints.setTypeface(tf); keyboard.setTypeface(tf); sponsor.setTypeface(tf);
+        picker.setTypeface(tf); prompt.setTypeface(tf); menu.setTypeface(tf); hints.setTypeface(tf); keyboard.setTypeface(tf);
     }
 
     @Override
@@ -663,7 +661,7 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback {
 
     private void renderMenu() {
         if (menuPage == PAGE_ABOUT) menu.setPage(DevTools.aboutTitle(), DevTools.about(versionName(), KeyProbe.prop("model.name"),
-                KeyProbe.firmware(), KeyProbe.prop("version.platform")), DevTools.aboutFooter(), Keys.hints(Keys.H_PAGE, caps));
+                KeyProbe.firmware(), KeyProbe.prop("version.platform")), null, Keys.hints(Keys.H_PAGE, caps));
         else if (menuPage == PAGE_TRANSFER && transfer != null) menu.setTransfer(transferSync ? DevTools.syncTitle() : DevTools.transferTitle(),
                 DevTools.transferPage(transfer.state(), transfer.stats(), transfer.rate(), transferSync), Keys.hints(Keys.H_TRANSFER, caps));
         else {
@@ -1208,8 +1206,6 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback {
         String pos = library.position(recipe);
         String grp = Recipes.groupLabel(r.group).toUpperCase();
         picker.setVisibility(overlay == OV_BROWSER ? View.VISIBLE : View.GONE);
-        sponsor.setText(DevTools.sponsorLine());                     // the README's ask, small, over the live view
-        sponsor.setVisibility(panelUp(overlay) ? View.VISIBLE : View.GONE);   // Full and No keys; Label and Hidden hide it
         if (overlay == OV_BROWSER) { panel.setVisibility(View.GONE); mini.setVisibility(View.GONE); picker.set(recipe, browserCol, browserGroup, favs, library, cardDir != null); return; }
         if (panelUp(overlay)) {
             panel.setVisibility(View.VISIBLE); mini.setVisibility(View.GONE);

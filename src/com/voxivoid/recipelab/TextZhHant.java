@@ -166,7 +166,7 @@ final class TextZhHant {
         { "about_platform", "平台" },
         { "about_source", "原始碼" },
         { "about_based", "based on" },
-        { "about_love", "喜歡這個專案嗎？歡迎打賞！" },
+        { "about_original", "original" },
         { "dev_title", "開發工具" },
         { "dev_settings_snapshot", "設定快照" },
         { "dev_settings_diff", "設定差異" },

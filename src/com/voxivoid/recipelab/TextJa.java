@@ -163,7 +163,7 @@ final class TextJa {
         { "about_platform", "プラットフォーム" },
         { "about_source", "ソース" },
         { "about_based", "based on" },
-        { "about_love", "気に入ったら、チップをどうぞ！" },
+        { "about_original", "original" },
         { "dev_title", "開発ツール" },
         { "dev_settings_snapshot", "設定スナップショット" },
         { "dev_settings_diff", "設定の差分" },

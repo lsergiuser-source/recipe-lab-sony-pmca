@@ -94,7 +94,7 @@ final class TextEn {
         { "custom_bad_value", "%1$s: %2$s is not allowed" },
         { "custom_twice", "%1$s is set twice" },
         { "custom_not_yaml", "line %1$d is not a YAML key: value" },
-        { "custom_newer", "made by a newer Recipe Lab (format %1$d)" },
+        { "custom_newer", "made by a newer Darkroom (format %1$d)" },
         { "custom_too_large", "too large to be a recipe" },
         { "custom_unreadable", "cannot be read: %1$s" },
         { "custom_duplicate", "%1$s is already the name in %2$s" },
@@ -188,7 +188,7 @@ final class TextEn {
         { "about_platform", "platform" },
         { "about_source", "source" },
         { "about_based", "based on" },
-        { "about_love", "Love this app? Leave a tip!" },
+        { "about_original", "original" },
 
         // ---- the developer menu and the sample run
         { "dev_title", "DEV TOOLS" },
