@@ -199,8 +199,8 @@ public class Recipes {
         new Recipe(ILFORD,"Ilford Pan F 50",                     MONO,     0,  2,  2, AUTO, 0,     0,  0),
         // ---- My Looks: measured from the owner's own photos — 1,904 X100V JPEGs (recipe read from each file's MakerNote; tone, chroma
         // and neutral-pixel cast measured in Lab) and 23 Ricoh GR DNG / Lightroom-edit pairs (edit against the camera's own render)
-        new Recipe(OWN,   "Astia Warm",                          PORTRAIT, 2, -1,  0, K,    6200,  3,  1,  0, -1, 6),   // 1,060 frames: Astia, Color +3, HL -1 SH -2, 6200K R+2 B-4, DR400 — neutrals sit at b+4.5 a-1, mean EV -0.8
-        new Recipe(OWN,   "Astia Warm AWB",                      PORTRAIT, 2, -1,  0, AUTO, 0,     3,  1,  0, -1, 6),   // the same look on auto white balance, for indoors and mixed light
+        new Recipe(OWN,   "X100V Astia",                          PORTRAIT, 2, -1,  0, K,    6200,  3,  1,  0, -1, 6),   // 1,060 frames: Astia, Color +3, HL -1 SH -2, 6200K R+2 B-4, DR400 — neutrals sit at b+4.5 a-1, mean EV -0.8
+        new Recipe(OWN,   "X100V Astia AWB",                      PORTRAIT, 2, -1,  0, AUTO, 0,     3,  1,  0, -1, 6),   // the same look on auto white balance, for indoors and mixed light
         new Recipe(OWN,   "Classic Neg",                         STD,     -1,  3,  0, AUTO, 0,     2,  3,  0,  0, 6),   // 165 frames: Classic Neg, Color +3, HL +3, R-3 B-9, clarity -4 — neutrals at b+4 a-5 (yellow-green), the most contrasty of these looks
         new Recipe(OWN,   "Eterna Warm",                         NEUTRAL,  0, -2, -1, K,    5500,  3,  1,  0,  0, 6),   // 120 frames: Eterna, Color +4, HL -1 SH -2, 5500K B-7, clarity -2 — muted but warm, soft highlights
         new Recipe(OWN,   "GR Edit",                             STD,     -3,  2,  0, AUTO, 0,     1, -3,  0, -2, DRO_OFF),   // 23 Lightroom edits vs the GR's render: median L 35 -> 20, blacks to 0, chroma x0.67, shadows and mids a+4 (magenta), highlights slightly cool
