@@ -204,6 +204,10 @@ public class Recipes {
         new Recipe(OWN,   "Classic Neg",                         STD,     -1,  3,  0, AUTO, 0,     2,  3,  0,  0, 6),   // 165 frames: Classic Neg, Color +3, HL +3, R-3 B-9, clarity -4 — neutrals at b+4 a-5 (yellow-green), the most contrasty of these looks
         new Recipe(OWN,   "Eterna Warm",                         NEUTRAL,  0, -2, -1, K,    5500,  3,  1,  0,  0, 6),   // 120 frames: Eterna, Color +4, HL -1 SH -2, 5500K B-7, clarity -2 — muted but warm, soft highlights
         new Recipe(OWN,   "GR Edit",                             STD,     -3,  2,  0, AUTO, 0,     1, -3,  0, -2, DRO_OFF),   // 23 Lightroom edits vs the GR's render: median L 35 -> 20, blacks to 0, chroma x0.67, shadows and mids a+4 (magenta), highlights slightly cool
+        // ---- cross-processed film, measured on the owner's scans with the same Lab pipeline as the X100V frames above
+        // (Provia default: chroma 8.6, mids a -1.6 b -5; Astia 6200K: chroma 13.9, mids b +19 -> that is PORTRAIT +2 A3)
+        new Recipe(OWN,   "Cross Process",                        VIVID,    3,  3,  1, AUTO, 0,     5,  1,  0,  2, DRO_OFF),   // Kodak 100VS, Elite Chrome, Paradis 100 cross (260 frames): chroma 2.4x, mids b +23..+27, highlights a -4 (green), blacks at 0, median L 70
+        new Recipe(OWN,   "Cross Process Red",                    VIVID,    3,  3,  1, AUTO, 0,     4, -5,  0,  1, DRO_OFF),   // Velvia 100 cross (68 frames): chroma 3.3x, mids a +36 b +27 (hot magenta-red), yellows x3.6
     };
 
     /**

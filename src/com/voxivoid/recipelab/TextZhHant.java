@@ -376,5 +376,7 @@ final class TextZhHant {
         { "recipe_classic_neg", "Classic Neg" },
         { "recipe_eterna_warm", "Eterna Warm" },
         { "recipe_gr_edit", "GR Edit" },
+        { "recipe_cross_process", "Cross Process" },
+        { "recipe_cross_process_red", "Cross Process Red" },
     };
 }
