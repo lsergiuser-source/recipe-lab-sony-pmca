@@ -165,6 +165,7 @@ final class TextZhHans {
         { "about_firmware", "固件" },
         { "about_platform", "平台" },
         { "about_source", "源代码" },
+        { "about_based", "based on" },
         { "about_love", "喜欢这个项目吗？欢迎打赏！" },
         { "dev_title", "开发工具" },
         { "dev_settings_snapshot", "设置快照" },
@@ -290,6 +291,7 @@ final class TextZhHans {
         { "group_pana_olympus", "松下 / 奥林巴斯" },
         { "group_other_stocks", "其他胶片" },
         { "group_ilford", "伊尔福" },
+        { "group_my_looks", "My Looks" },
 
         // ---- recipes: the display name; the canonical English stays the identifier
         { "recipe_factory_st", "出厂标准" },
@@ -369,5 +371,10 @@ final class TextZhHans {
         { "recipe_ilford_delta_100", "伊尔福 Delta 100" },
         { "recipe_ilford_delta_3200", "伊尔福 Delta 3200" },
         { "recipe_ilford_pan_f_50", "伊尔福 Pan F 50" },
+        { "recipe_astia_warm", "Astia Warm" },
+        { "recipe_astia_warm_awb", "Astia Warm AWB" },
+        { "recipe_classic_neg", "Classic Neg" },
+        { "recipe_eterna_warm", "Eterna Warm" },
+        { "recipe_gr_edit", "GR Edit" },
     };
 }

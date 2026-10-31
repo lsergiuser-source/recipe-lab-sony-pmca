@@ -57,7 +57,7 @@ import static com.voxivoid.recipelab.Params.*;
  * {@link Lang}, in the language the app menu picked; this class only applies it and its font ({@link UiFont}).
  */
 public class MainActivity extends Activity implements SurfaceHolder.Callback {
-    private static final int ACCENT = 0xFFF2B85C, INK = 0xFF1A1208, WHITE = 0xFFFFFFFF, DIM = 0x99FFFFFF;
+    private static final int ACCENT = Theme.ACCENT, INK = Theme.INK, WHITE = Theme.PAPER, DIM = Theme.DIM;
 
     private View panel;
     private PickerView picker;
@@ -279,8 +279,8 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback {
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             lp.rightMargin = dp(5);
             c.setLayoutParams(lp);
-            TextView l = new TextView(this); l.setTextSize(9);                    // its text is set by render(), in the display language
-            TextView v = new TextView(this); v.setTextSize(13); v.setTypeface(Typeface.DEFAULT_BOLD); v.setSingleLine(true);
+            TextView l = new TextView(this); l.setTextSize(9); l.setTypeface(Typeface.MONOSPACE);   // its text is set by render(), in the display language
+            TextView v = new TextView(this); v.setTextSize(13); v.setTypeface(Typeface.MONOSPACE, Typeface.BOLD); v.setSingleLine(true);
             c.addView(l); c.addView(v);
             chips.addView(c);
             chip[i] = c; chipLabel[i] = l; chipValue[i] = v;
@@ -291,7 +291,7 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback {
     private void buildActions() {
         for (int i = 0; i < actionBtn.length; i++) {
             TextView b = new TextView(this);
-            b.setTextSize(12); b.setTypeface(Typeface.DEFAULT_BOLD); b.setSingleLine(true);
+            b.setTextSize(12); b.setTypeface(Typeface.MONOSPACE, Typeface.BOLD); b.setSingleLine(true);
             b.setPadding(dp(12), dp(4), dp(12), dp(4));
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             lp.rightMargin = dp(6);

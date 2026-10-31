@@ -17,7 +17,7 @@ import java.util.List;
  * overflow the box are drawn smaller rather than cut.
  */
 public class PromptView extends View {
-    private static final int ACCENT = 0xFFF2B85C, INK = 0xFF1A1208;
+    private static final int ACCENT = Theme.ACCENT, INK = Theme.INK;
 
     private final Paint bg = new Paint(Paint.ANTI_ALIAS_FLAG), edge = new Paint(Paint.ANTI_ALIAS_FLAG), title = new Paint(Paint.ANTI_ALIAS_FLAG),
             body = new Paint(Paint.ANTI_ALIAS_FLAG), opt = new Paint(Paint.ANTI_ALIAS_FLAG), pill = new Paint(Paint.ANTI_ALIAS_FLAG), note = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -31,17 +31,18 @@ public class PromptView extends View {
     public PromptView(Context c, AttributeSet a) {
         super(c, a);
         d = c.getResources().getDisplayMetrics().density;
-        bg.setColor(0xF0141414);
-        edge.setColor(0x88F2B85C); edge.setStyle(Paint.Style.STROKE); edge.setStrokeWidth(d);
-        title.setColor(0xFFFFFFFF); title.setTextSize(15 * d); title.setFakeBoldText(true);
-        body.setColor(0xCCFFFFFF); body.setTextSize(12 * d);
+        bg.setColor(Theme.PANEL);
+        edge.setColor(Theme.EDGE); edge.setStyle(Paint.Style.STROKE); edge.setStrokeWidth(d);
+        title.setColor(Theme.PAPER); title.setTextSize(15 * d); title.setFakeBoldText(true);
+        body.setColor(Theme.PAPER_SOFT); body.setTextSize(12 * d);
         opt.setTextSize(13 * d); opt.setFakeBoldText(true); opt.setTextAlign(Paint.Align.CENTER);
-        note.setColor(0x88FFFFFF); note.setTextSize(10 * d);
+        note.setColor(Theme.FAINT); note.setTextSize(10 * d);
+        setTypeface(Typeface.DEFAULT);
     }
 
     /** the display language's typeface ({@link UiFont}) */
     public void setTypeface(Typeface tf) {
-        title.setTypeface(tf); body.setTypeface(tf); opt.setTypeface(tf); note.setTypeface(tf);
+        title.setTypeface(Theme.serif(tf)); body.setTypeface(tf); opt.setTypeface(Theme.mono(tf)); note.setTypeface(tf);
         requestLayout(); invalidate();
     }
 
@@ -90,7 +91,7 @@ public class PromptView extends View {
     @Override
     protected void onDraw(Canvas c) {
         float w = getWidth(), h = getHeight(), pad = 16 * d;
-        r.set(0, 0, w, h); c.drawRoundRect(r, 8 * d, 8 * d, bg); c.drawRoundRect(r, 8 * d, 8 * d, edge);
+        r.set(0, 0, w, h); c.drawRoundRect(r, 4 * d, 4 * d, bg); c.drawRoundRect(r, 4 * d, 4 * d, edge);
         float y = 14 * d + 15 * d;
         for (String l : titleLines) { c.drawText(l, pad, y, title); y += titleStep(); }
         y -= titleStep() - 18 * d;                              // the gap under the title, as before
@@ -110,9 +111,9 @@ public class PromptView extends View {
         for (int i = 0; i < options.length; i++) {
             float pw = opt.measureText(options[i]) + 28 * d * k;
             r.set(x, py, x + pw, py + ph);
-            pill.setColor(i == selected ? ACCENT : 0x33FFFFFF);
-            c.drawRoundRect(r, 5 * d, 5 * d, pill);
-            opt.setColor(i == selected ? INK : 0xFFFFFFFF);
+            pill.setColor(i == selected ? ACCENT : Theme.CHIP);
+            c.drawRoundRect(r, Theme.radius(d), Theme.radius(d), pill);
+            opt.setColor(i == selected ? INK : Theme.PAPER);
             c.drawText(options[i], x + pw / 2, py + ph / 2 - (opt.ascent() + opt.descent()) / 2, opt);
             x += pw + 8 * d * k;
         }

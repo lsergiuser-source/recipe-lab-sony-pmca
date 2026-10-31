@@ -162,6 +162,7 @@ final class TextJa {
         { "about_firmware", "ファームウェア" },
         { "about_platform", "プラットフォーム" },
         { "about_source", "ソース" },
+        { "about_based", "based on" },
         { "about_love", "気に入ったら、チップをどうぞ！" },
         { "dev_title", "開発ツール" },
         { "dev_settings_snapshot", "設定スナップショット" },
@@ -292,6 +293,7 @@ final class TextJa {
         { "group_pana_olympus", "パナソニック / オリンパス" },
         { "group_other_stocks", "その他のフィルム" },
         { "group_ilford", "イルフォード" },
+        { "group_my_looks", "My Looks" },
 
         // ---- recipes: the display name; the canonical English stays the identifier
         { "recipe_factory_st", "ファクトリー スタンダード" },
@@ -371,5 +373,10 @@ final class TextJa {
         { "recipe_ilford_delta_100", "イルフォード Delta 100" },
         { "recipe_ilford_delta_3200", "イルフォード Delta 3200" },
         { "recipe_ilford_pan_f_50", "イルフォード Pan F 50" },
+        { "recipe_astia_warm", "Astia Warm" },
+        { "recipe_astia_warm_awb", "Astia Warm AWB" },
+        { "recipe_classic_neg", "Classic Neg" },
+        { "recipe_eterna_warm", "Eterna Warm" },
+        { "recipe_gr_edit", "GR Edit" },
     };
 }

@@ -162,6 +162,7 @@ final class TextKo {
         { "about_firmware", "펌웨어" },
         { "about_platform", "플랫폼" },
         { "about_source", "소스" },
+        { "about_based", "based on" },
         { "about_love", "이 앱이 마음에 드시나요? 후원해 주세요!" },
         { "dev_title", "개발 도구" },
         { "dev_settings_snapshot", "설정 스냅샷" },
@@ -292,6 +293,7 @@ final class TextKo {
         { "group_pana_olympus", "파나소닉 / 올림푸스" },
         { "group_other_stocks", "기타 필름" },
         { "group_ilford", "일포드" },
+        { "group_my_looks", "My Looks" },
 
         // ---- recipes: the display name; the canonical English stays the identifier
         { "recipe_factory_st", "팩토리 스탠다드" },
@@ -371,5 +373,10 @@ final class TextKo {
         { "recipe_ilford_delta_100", "일포드 Delta 100" },
         { "recipe_ilford_delta_3200", "일포드 Delta 3200" },
         { "recipe_ilford_pan_f_50", "일포드 Pan F 50" },
+        { "recipe_astia_warm", "Astia Warm" },
+        { "recipe_astia_warm_awb", "Astia Warm AWB" },
+        { "recipe_classic_neg", "Classic Neg" },
+        { "recipe_eterna_warm", "Eterna Warm" },
+        { "recipe_gr_edit", "GR Edit" },
     };
 }

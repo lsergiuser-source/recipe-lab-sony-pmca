@@ -37,14 +37,16 @@ final class UiFont {
     }
 
     /**
-     * Every TextView under {@code v} in {@code tf}, each keeping the style its layout gave it. That style is kept in the
-     * view's tag the first time, because a typeface without a bold face reports plain once it is set.
+     * Every TextView under {@code v} in {@code tf}, each keeping the style its layout gave it; the camera's default face
+     * ({@code Typeface.DEFAULT}) means the layout's own face comes back. Face and style are kept in the view's tag the
+     * first time, because a typeface without a bold face reports plain once it is set.
      */
     static void apply(View v, Typeface tf) {
         if (v instanceof TextView) {
             TextView t = (TextView) v;
-            if (!(t.getTag() instanceof Integer)) t.setTag(t.getTypeface() == null ? Typeface.NORMAL : t.getTypeface().getStyle());
-            t.setTypeface(tf, (Integer) t.getTag());
+            if (!(t.getTag() instanceof Object[])) t.setTag(new Object[] { t.getTypeface(), t.getTypeface() == null ? Typeface.NORMAL : t.getTypeface().getStyle() });
+            Object[] own = (Object[]) t.getTag();                       // the layout's own face and style (Theme: serif names, monospace chips)
+            t.setTypeface(tf == Typeface.DEFAULT ? (Typeface) own[0] : tf, (Integer) own[1]);
         }
         if (v instanceof ViewGroup) {
             ViewGroup g = (ViewGroup) v;

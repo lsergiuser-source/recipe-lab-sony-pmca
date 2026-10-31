@@ -38,7 +38,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="-1dp"
             android:textSize="11sp"
-            android:textColor="#B3FFFFFF"
+            android:textColor="#B3F4E8CF"
+            android:typeface="monospace"
             android:singleLine="true" />
 
         <!-- name, then its badges. The row is as wide as its content, so the badges sit right after a short name; the
@@ -54,9 +55,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ellipsize="end"
-                android:textSize="21sp"
+                android:textSize="22sp"
                 android:textStyle="bold"
-                android:textColor="#FFFFFFFF"
+                android:typeface="serif"
+                android:textColor="#FFF4E8CF"
                 android:shadowColor="#AA000000"
                 android:shadowDx="0" android:shadowDy="1" android:shadowRadius="2"
                 android:singleLine="true" />
@@ -69,7 +71,8 @@
                 android:paddingTop="2dp" android:paddingBottom="2dp"
                 android:textSize="10sp"
                 android:textStyle="bold"
-                android:textColor="#FFFFFFFF"
+                android:typeface="monospace"
+                android:textColor="#FFF4E8CF"
                 android:background="@drawable/badge_ok" />
             <!-- beside ACTIVE / PREVIEW while the recipe has edits: the two say different things -->
             <TextView
@@ -81,7 +84,8 @@
                 android:paddingTop="2dp" android:paddingBottom="2dp"
                 android:textSize="10sp"
                 android:textStyle="bold"
-                android:textColor="#FFFFFFFF"
+                android:typeface="monospace"
+                android:textColor="#FFF4E8CF"
                 android:background="@drawable/badge_edited"
                 android:visibility="gone" />
             <TextView
@@ -93,7 +97,8 @@
                 android:paddingTop="2dp" android:paddingBottom="2dp"
                 android:textSize="9sp"
                 android:textStyle="bold"
-                android:textColor="#DDFFFFFF"
+                android:typeface="monospace"
+                android:textColor="#FFE89B2E"
                 android:background="@drawable/chip" />
             <com.voxivoid.recipelab.StarView
                 android:id="@+id/fav"
@@ -110,7 +115,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="-1dp"
             android:textSize="9sp"
-            android:textColor="#8FFFFFFF"
+            android:textColor="#8FF4E8CF"
+            android:typeface="serif"
             android:singleLine="true"
             android:visibility="gone" />
 
@@ -120,7 +126,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
             android:textSize="11sp"
-            android:textColor="#A6FFFFFF"
+            android:textColor="#A6F4E8CF"
             android:maxLines="3" />
 
         <HorizontalScrollView
@@ -166,7 +172,8 @@
         android:paddingTop="4dp" android:paddingBottom="4dp"
         android:textSize="13sp"
         android:textStyle="bold"
-        android:textColor="#FFFFFFFF"
+        android:typeface="serif"
+        android:textColor="#FFF4E8CF"
         android:background="@drawable/pill" />
 
     <!-- brand browser -->
@@ -208,7 +215,8 @@
         android:paddingLeft="12dp" android:paddingRight="12dp"
         android:paddingTop="5dp" android:paddingBottom="5dp"
         android:textSize="12sp"
-        android:textColor="#FFFFFFFF"
+        android:typeface="monospace"
+        android:textColor="#FFF4E8CF"
         android:background="@drawable/toast_bg"
         android:visibility="gone" />
 </FrameLayout>

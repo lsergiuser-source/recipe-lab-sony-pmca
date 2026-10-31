@@ -24,8 +24,8 @@ public class SponsorLine extends View {
     public SponsorLine(Context c, AttributeSet a) {
         super(c, a);
         d = c.getResources().getDisplayMetrics().density;
-        text.setColor(0xDDFFFFFF); text.setTextSize(9 * d);
-        bg.setColor(0x99000000);                                    // a dark pill, see-through: readable over a bright scene
+        text.setColor(Theme.PAPER_SOFT); text.setTextSize(9 * d);
+        bg.setColor(Theme.PILL);                                    // a dark pill, see-through: readable over a bright scene
         heart.setColor(Legend.HEART_PINK);
     }
 

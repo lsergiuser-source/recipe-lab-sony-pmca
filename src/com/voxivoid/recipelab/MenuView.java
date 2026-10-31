@@ -18,13 +18,14 @@ import android.view.View;
  * large in a card, what to do, and a footer of the address and the totals.
  */
 public class MenuView extends View {
-    private static final int ACCENT = 0xFFF2B85C, INK = 0xFF1A1208;
+    private static final int ACCENT = Theme.ACCENT, INK = Theme.INK;
 
     private final Paint bg = new Paint(Paint.ANTI_ALIAS_FLAG), head = new Paint(Paint.ANTI_ALIAS_FLAG),
             item = new Paint(Paint.ANTI_ALIAS_FLAG), small = new Paint(Paint.ANTI_ALIAS_FLAG), row = new Paint(Paint.ANTI_ALIAS_FLAG),
             key = new Paint(Paint.ANTI_ALIAS_FLAG), value = new Paint(Paint.ANTI_ALIAS_FLAG), arrow = new Paint(Paint.ANTI_ALIAS_FLAG),
             rule = new Paint(), track = new Paint(Paint.ANTI_ALIAS_FLAG), thumb = new Paint(Paint.ANTI_ALIAS_FLAG);
     private final RectF r = new RectF();
+    private final Paint scan = new Paint();
     private final Path tri = new Path(), shape = new Path();
     private final Paint glyph = new Paint(Paint.ANTI_ALIAS_FLAG);
     private final RectF box = new RectF();
@@ -50,7 +51,7 @@ public class MenuView extends View {
         super(c, a);
         d = c.getResources().getDisplayMetrics().density;
         legend = new Legend(d);
-        bg.setColor(0xF0101010);
+        bg.setColor(Theme.PANEL);
         head.setColor(ACCENT); head.setTextSize(9 * d); head.setFakeBoldText(true);
         item.setTextSize(13 * d); item.setFakeBoldText(true);
         small.setTextSize(10 * d);
@@ -58,22 +59,23 @@ public class MenuView extends View {
         value.setTextSize(13 * d); value.setFakeBoldText(true); value.setTextAlign(Paint.Align.CENTER);
         arrow.setStyle(Paint.Style.FILL);
         glyph.setStyle(Paint.Style.STROKE); glyph.setStrokeWidth(1.5f * d); glyph.setStrokeCap(Paint.Cap.ROUND);
-        rule.setColor(0x33FFFFFF);
-        track.setColor(0x26FFFFFF); thumb.setColor(0xCCF2B85C);
+        rule.setColor(Theme.RULE);
+        track.setColor(Theme.CHIP); thumb.setColor(Theme.ACCENT_SOFT);
         chipText.setTextSize(9.5f * d); chipText.setFakeBoldText(true);
-        card.setColor(0x14FFFFFF);
-        cardEdge.setStyle(Paint.Style.STROKE); cardEdge.setStrokeWidth(d); cardEdge.setColor(0x40F2B85C);
+        card.setColor(Theme.CARD);
+        cardEdge.setStyle(Paint.Style.STROKE); cardEdge.setStrokeWidth(d); cardEdge.setColor(Theme.EDGE_FAINT);
         big.setFakeBoldText(true); big.setTypeface(Typeface.MONOSPACE);   // the password: 0 / O and 1 / l told apart
-        label.setTextSize(9 * d); label.setColor(0x99FFFFFF);
+        label.setTextSize(9 * d); label.setColor(Theme.DIM);
         body.setTextSize(11 * d);
         foot.setTextSize(9.5f * d);
+        setTypeface(Typeface.DEFAULT);
     }
 
     /** the display language's typeface ({@link UiFont}) */
     public void setTypeface(Typeface tf) {
         face = tf;
-        head.setTypeface(tf); item.setTypeface(tf); small.setTypeface(tf); key.setTypeface(tf); value.setTypeface(tf); legend.setTypeface(tf);
-        chipText.setTypeface(tf); label.setTypeface(tf); body.setTypeface(tf); foot.setTypeface(tf);
+        head.setTypeface(Theme.mono(tf)); item.setTypeface(Theme.serif(tf)); small.setTypeface(tf); key.setTypeface(Theme.mono(tf)); value.setTypeface(Theme.mono(tf)); legend.setTypeface(tf);
+        chipText.setTypeface(Theme.mono(tf)); label.setTypeface(Theme.mono(tf)); body.setTypeface(tf); foot.setTypeface(Theme.mono(tf));
         invalidate();
     }
 
@@ -120,9 +122,11 @@ public class MenuView extends View {
     protected void onDraw(Canvas c) {
         float w = getWidth(), h = getHeight(), pad = 16 * d;
         c.drawRect(0, 0, w, h, bg);
+        Theme.scanlines(c, w, h, d, scan);
         float legTop = h - pad - legend.height(legend.lines(w - 2 * pad, hints)) + 2 * d;   // the legend, on as many lines as it needs
         float top = pad + 14 * d, bottom = legTop - 6 * d;          // header / footer reserved, as in the brand list
         c.drawLine(pad, top, w - pad, top, rule);
+        c.drawLine(pad, top + 2 * d, w - pad, top + 2 * d, rule);   // a double rule, as on a ledger
         if (transfer != null) {
             drawTransfer(c, transfer, w, pad, top, legTop);
             c.drawLine(pad, legTop - 2 * d, w - pad, legTop - 2 * d, rule);
@@ -138,7 +142,7 @@ public class MenuView extends View {
         float sbW = 4 * d, right = w - pad - (scroll ? sbW + 8 * d : 0), listTop = y;
         if (page) {
             float kc = keyColumn();
-            small.setColor(0xDDFFFFFF);
+            small.setColor(Theme.PAPER_SOFT);
             for (int i = first; i < Math.min(n, first + visible); i++, y += rh) {
                 c.drawText(labels[i], pad, y + 13 * d, key);
                 c.drawText(details[i], pad + kc, y + 13 * d, small);
@@ -149,9 +153,9 @@ public class MenuView extends View {
                 float tw = small.measureText(footer[0]), hs = 4 * d, x0 = (w - (tw + 4 * hs)) / 2;
                 glyph.setStyle(Paint.Style.FILL); glyph.setColor(Legend.HEART_PINK);
                 Legend.heart(c, x0 + hs, fy - 3.5f * d, hs, glyph);
-                small.setColor(0xFFFFFFFF);
+                small.setColor(Theme.PAPER);
                 c.drawText(footer[0], x0 + 4 * hs, fy, small);
-                small.setColor(0xCCF2B85C);
+                small.setColor(Theme.ACCENT_SOFT);
                 small.setTextAlign(Paint.Align.CENTER);
                 for (int k = 1; k < footer.length; k++) c.drawText(footer[k], w / 2, fy + k * 16 * d, small);
                 small.setTextAlign(Paint.Align.LEFT);
@@ -159,8 +163,8 @@ public class MenuView extends View {
         } else {
             for (int i = first; i < Math.min(n, first + visible); i++, y += rh) {
                 boolean on = i == selected;
-                if (on) { r.set(pad - 6 * d, y, right + 6 * d, y + rh - 3 * d); row.setColor(ACCENT); c.drawRoundRect(r, 4 * d, 4 * d, row); }
-                item.setColor(on ? INK : 0xFFFFFFFF);
+                if (on) { r.set(pad - 6 * d, y, right + 6 * d, y + rh - 3 * d); row.setColor(ACCENT); c.drawRoundRect(r, Theme.radius(d), Theme.radius(d), row); }
+                item.setColor(on ? INK : Theme.PAPER);
                 float tx = pad;
                 if (icons != null && i < icons.length) {             // the row's icon, then its text beside it
                     glyph.setColor(on ? INK : ACCENT);
@@ -168,10 +172,10 @@ public class MenuView extends View {
                     tx = pad + 26 * d;
                 }
                 c.drawText(labels[i], tx, y + 16 * d, item);
-                small.setColor(on ? 0xCC1A1208 : 0x99FFFFFF);
+                small.setColor(on ? Theme.INK_SOFT : Theme.DIM);
                 c.drawText(details[i], tx, y + 29 * d, small);
                 if (values[i] != null) {
-                    value.setTypeface(valueFaces[i] != null ? valueFaces[i] : face);
+                    value.setTypeface(valueFaces[i] != null ? valueFaces[i] : Theme.mono(face));
                     drawValue(c, values[i], right, y + rh / 2 - 1.5f * d, on);
                 }
             }
@@ -191,8 +195,8 @@ public class MenuView extends View {
         // header: icon, title, chip
         glyph.setColor(ACCENT);
         drawIcon(c, DevTools.IC_TRANSFER, pad + 6 * d, pad + 3.5f * d, 5.5f * d);
-        int chipFill = p.tone == DevTools.TransferPage.READY ? READY_GREEN : p.tone == DevTools.TransferPage.ERROR ? ERROR_RED : 0x33FFFFFF;
-        int chipInk = p.tone == DevTools.TransferPage.READY ? INK : 0xFFFFFFFF;
+        int chipFill = p.tone == DevTools.TransferPage.READY ? READY_GREEN : p.tone == DevTools.TransferPage.ERROR ? ERROR_RED : Theme.CHIP;
+        int chipInk = p.tone == DevTools.TransferPage.READY ? INK : Theme.PAPER;
         float chipW = chipText.measureText(p.chip) + 22 * d, chipR = w - pad, chipL = chipR - chipW;
         r.set(chipL, pad - 3.5f * d, chipR, pad + 10.5f * d);
         chip.setColor(chipFill);
@@ -207,9 +211,9 @@ public class MenuView extends View {
         // the card: network and password, as large as fits
         float cardTop = top + 9 * d, cardBottom = cardTop + 92 * d, cx = pad + 12 * d, cw = inner - 24 * d;
         r.set(pad, cardTop, w - pad, cardBottom);
-        c.drawRoundRect(r, 6 * d, 6 * d, card);
-        cardEdge.setColor(p.tone == DevTools.TransferPage.READY ? 0x806CC48A : 0x40F2B85C);
-        c.drawRoundRect(r, 6 * d, 6 * d, cardEdge);
+        c.drawRoundRect(r, 3 * d, 3 * d, card);
+        cardEdge.setColor(p.tone == DevTools.TransferPage.READY ? 0x806CC48A : Theme.EDGE_FAINT);
+        c.drawRoundRect(r, 3 * d, 3 * d, cardEdge);
         c.drawLine(cx, cardTop + 46 * d, w - pad - 12 * d, cardTop + 46 * d, rule);
         c.drawText(p.networkLabel, cx, cardTop + 14 * d, label);
         bigLine(c, p.network, cx, cardTop + 38 * d, cw);
@@ -224,7 +228,7 @@ public class MenuView extends View {
             body.setFakeBoldText(false);
             y += 15 * d;
         }
-        body.setColor(0xDDFFFFFF);
+        body.setColor(Theme.PAPER_SOFT);
         float footTop = legTop - 34 * d;                             // the footer's two lines sit above the legend's rule
         int maxLines = Math.max(1, Math.min(wrapped.length, (int) ((footTop - y) / (14 * d)) + 1));
         int n = wrap(p.instruction, body, inner, maxLines);
@@ -232,11 +236,11 @@ public class MenuView extends View {
 
         // footer: address · last request, then the totals
         float fy = legTop - 21 * d;
-        foot.setColor(0xCCF2B85C);
+        foot.setColor(Theme.ACCENT_SOFT);
         String addr = p.address + "   ";
         c.drawText(addr, pad, fy, foot);
         float ax = pad + foot.measureText(addr);
-        foot.setColor(0x99FFFFFF);
+        foot.setColor(Theme.DIM);
         c.drawText(ellipsize(p.last, foot, w - pad - ax), ax, fy, foot);
         c.drawText(ellipsize(p.totals, foot, inner), pad, fy + 13 * d, foot);
     }
@@ -246,7 +250,7 @@ public class MenuView extends View {
         big.setTextSize(22 * d);
         float tw = big.measureText(text);
         if (tw > width) big.setTextSize(Math.max(10 * d, 22 * d * width / tw));
-        big.setColor("—".equals(text) ? 0x55FFFFFF : 0xFFFFFFFF);
+        big.setColor("—".equals(text) ? Theme.FAINT : Theme.PAPER);
         c.drawText(ellipsize(text, big, width), x, baseline, big);
     }
 
@@ -287,8 +291,8 @@ public class MenuView extends View {
     private void drawValue(Canvas c, String text, float right, float cy, boolean on) {
         float a = 4.5f * d, gap = 7 * d, tw = Math.max(value.measureText(text), value.measureText("English"));   // a steady width as it changes
         float rx = right - 4 * d, lx = rx - a - gap - tw - gap - a;
-        int col = on ? INK : 0xCCFFFFFF;
-        arrow.setColor(on ? INK : 0x88FFFFFF); value.setColor(col);
+        int col = on ? INK : Theme.PAPER_SOFT;
+        arrow.setColor(on ? INK : Theme.FAINT); value.setColor(col);
         triangle(c, lx, cy, lx + a, cy - a, lx + a, cy + a);                        // left
         triangle(c, rx, cy, rx - a, cy - a, rx - a, cy + a);                        // right
         c.drawText(text, lx + a + gap + tw / 2, cy - (value.ascent() + value.descent()) / 2f, value);

@@ -33,8 +33,8 @@ class DevToolsTest {
     }
 
     @Test void theSampleRowNamesTheWholeTable() {
-        assertEquals("Shoot samples — 77 recipes", DevTools.rowLabel(DevTools.ROW_SAMPLES, false, 0));
-        assertEquals(77, Recipes.ALL.length, "the label counts the table, so the table is what it must count");
+        assertEquals("Shoot samples — 82 recipes", DevTools.rowLabel(DevTools.ROW_SAMPLES, false, 0));
+        assertEquals(82, Recipes.ALL.length, "the label counts the table, so the table is what it must count");
     }
 
     @Test void oneTurnOfTheMenuVisitsEveryRowItDefines() {
@@ -243,12 +243,13 @@ class DevToolsTest {
     // ---- About
     @Test void aboutShowsVersionCameraFirmwarePlatformAndSource() {
         String[][] a = DevTools.about("9.8.7", null, "3.21", "");
-        assertEquals(5, a.length, "the facts; the sponsor ask is the footer");
+        assertEquals(6, a.length, "the facts and the attribution; the sponsor ask is the footer");
         assertEquals("version", a[0][0]); assertEquals("9.8.7", a[0][1]);
         assertEquals("camera", a[1][0]); assertEquals("unknown", a[1][1], "no model from the camera");
         assertEquals("firmware", a[2][0]); assertEquals("3.21", a[2][1]);
         assertEquals("platform", a[3][0]); assertEquals("unknown", a[3][1], "an empty platform string");
         assertEquals("source", a[4][0]);
+        assertEquals("based on", a[5][0]); assertEquals("Recipe Lab by André Domingues", a[5][1], "the original's GPL section 7(b) attribution");
         assertEquals("unknown", DevTools.about(null, null, null, null)[2][1], "no firmware from the camera");
         String[] f = DevTools.aboutFooter();
         assertEquals("Love this app? Leave a tip!", f[0], "the README's ask");
@@ -305,26 +306,26 @@ class DevToolsTest {
 
     // ---- what the run says while it walks the table
     @Test void progressCountsFramesFromOneAndNamesTheWayOut() {
-        String p = DevTools.progress(1, 77, "FACTORY (ST)");
-        assertTrue(p.startsWith("Shooting 1 / 77"), p);
+        String p = DevTools.progress(1, 82, "FACTORY (ST)");
+        assertTrue(p.startsWith("Shooting 1 / 82"), p);
         assertTrue(p.contains("FACTORY (ST)"), p);
         assertTrue(p.contains("MENU"), p);
     }
 
     @Test void theEndOfARunSaysHowManyFramesAndWhereTheListIs() {
-        assertTrue(DevTools.doneMessage(77, 77).contains("77 of 77"), DevTools.doneMessage(77, 77));
-        assertTrue(DevTools.doneMessage(77, 77).contains(DevTools.MANIFEST));
-        assertTrue(DevTools.stoppedMessage(12, 77).contains("12 of 77"), DevTools.stoppedMessage(12, 77));
-        assertTrue(DevTools.stoppedMessage(0, 77).contains("before the first frame"), "nothing was shot, so there is nothing to point at");
-        assertFalse(DevTools.stoppedMessage(0, 77).contains(DevTools.MANIFEST));
+        assertTrue(DevTools.doneMessage(82, 82).contains("82 of 82"), DevTools.doneMessage(82, 82));
+        assertTrue(DevTools.doneMessage(82, 82).contains(DevTools.MANIFEST));
+        assertTrue(DevTools.stoppedMessage(12, 82).contains("12 of 82"), DevTools.stoppedMessage(12, 82));
+        assertTrue(DevTools.stoppedMessage(0, 82).contains("before the first frame"), "nothing was shot, so there is nothing to point at");
+        assertFalse(DevTools.stoppedMessage(0, 82).contains(DevTools.MANIFEST));
         assertTrue(DevTools.shootFailed(13, 12, "timeout").contains("frame 13"), DevTools.shootFailed(13, 12, "timeout"));
     }
 
     // ---- the manifest
     @Test void theHeaderRecordsTheFrameCountTheOrderAndTheDelay() {
-        String h = DevTools.manifestHeader(77, 1200);
+        String h = DevTools.manifestHeader(82, 1200);
         assertTrue(h.startsWith("#"), h);
-        assertTrue(h.contains("77 frames in recipe order"), h);
+        assertTrue(h.contains("82 frames in recipe order"), h);
         assertTrue(h.contains("settle 1200 ms"), h);
         assertTrue(h.contains("frame" + DevTools.SEP + "recipe"), "the header names the columns of the lines below it");
     }

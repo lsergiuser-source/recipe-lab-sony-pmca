@@ -187,6 +187,7 @@ final class TextEn {
         { "about_firmware", "firmware" },
         { "about_platform", "platform" },
         { "about_source", "source" },
+        { "about_based", "based on" },
         { "about_love", "Love this app? Leave a tip!" },
 
         // ---- the developer menu and the sample run

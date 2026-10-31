@@ -162,6 +162,7 @@ final class TextVi {
         { "about_firmware", "firmware" },
         { "about_platform", "nền tảng" },
         { "about_source", "mã nguồn" },
+        { "about_based", "based on" },
         { "about_love", "Thích ứng dụng này? Hãy tip cho chúng tôi!" },
         { "dev_title", "CÔNG CỤ DEV" },
         { "dev_settings_snapshot", "Ảnh chụp cài đặt" },
@@ -292,6 +293,7 @@ final class TextVi {
         { "group_pana_olympus", "Panasonic / Olympus" },
         { "group_other_stocks", "Film khác" },
         { "group_ilford", "Ilford" },
+        { "group_my_looks", "My Looks" },
 
         // ---- recipes: the display name; the canonical English stays the identifier
         { "recipe_factory_st", "Factory Standard" },
@@ -371,5 +373,10 @@ final class TextVi {
         { "recipe_ilford_delta_100", "Ilford Delta 100" },
         { "recipe_ilford_delta_3200", "Ilford Delta 3200" },
         { "recipe_ilford_pan_f_50", "Ilford Pan F 50" },
+        { "recipe_astia_warm", "Astia Warm" },
+        { "recipe_astia_warm_awb", "Astia Warm AWB" },
+        { "recipe_classic_neg", "Classic Neg" },
+        { "recipe_eterna_warm", "Eterna Warm" },
+        { "recipe_gr_edit", "GR Edit" },
     };
 }

@@ -24,14 +24,14 @@ public class Legend {
 
     public Legend(float density) {
         d = density;
-        fill.setColor(0xCCFFFFFF); fill.setStyle(Paint.Style.FILL);
-        stroke.setColor(0xCCFFFFFF); stroke.setStyle(Paint.Style.STROKE);
-        text.setColor(0x99FFFFFF);
-        keyText.setColor(0xCCFFFFFF); keyText.setTextAlign(Paint.Align.CENTER); keyText.setFakeBoldText(true);
+        fill.setColor(Theme.ICON); fill.setStyle(Paint.Style.FILL);
+        stroke.setColor(Theme.ICON); stroke.setStyle(Paint.Style.STROKE);
+        text.setColor(Theme.DIM); text.setTypeface(Typeface.MONOSPACE);
+        keyText.setColor(Theme.ICON); keyText.setTextAlign(Paint.Align.CENTER); keyText.setFakeBoldText(true); keyText.setTypeface(Typeface.MONOSPACE);
     }
 
     /** the labels' typeface: the display language's ({@link UiFont}); the key caps keep the camera's */
-    public void setTypeface(Typeface tf) { text.setTypeface(tf); }
+    public void setTypeface(Typeface tf) { text.setTypeface(Theme.mono(tf)); }
 
     private static final Path STAR = new Path();
 

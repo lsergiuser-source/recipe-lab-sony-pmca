@@ -16,12 +16,13 @@ import android.view.View;
  * has no arrow glyphs.
  */
 public class KeyboardView extends View {
-    private static final int ACCENT = 0xFFF2B85C, INK = 0xFF1A1208;
+    private static final int ACCENT = Theme.ACCENT, INK = Theme.INK;
 
     private final Paint bg = new Paint(Paint.ANTI_ALIAS_FLAG), head = new Paint(Paint.ANTI_ALIAS_FLAG), field = new Paint(Paint.ANTI_ALIAS_FLAG),
             box = new Paint(Paint.ANTI_ALIAS_FLAG), err = new Paint(Paint.ANTI_ALIAS_FLAG), cell = new Paint(Paint.ANTI_ALIAS_FLAG),
             label = new Paint(Paint.ANTI_ALIAS_FLAG), glyph = new Paint(Paint.ANTI_ALIAS_FLAG), rule = new Paint();
     private final RectF r = new RectF();
+    private final Paint scan = new Paint();
     private final Path path = new Path();
     private final Legend legend;
     private final float d;
@@ -33,19 +34,20 @@ public class KeyboardView extends View {
         super(c, a);
         d = c.getResources().getDisplayMetrics().density;
         legend = new Legend(d);
-        bg.setColor(0xF0101010);
+        bg.setColor(Theme.PANEL);
         head.setColor(ACCENT); head.setTextSize(9 * d); head.setFakeBoldText(true);
         field.setTextSize(17 * d); field.setFakeBoldText(true);
         box.setColor(ACCENT); box.setStyle(Paint.Style.STROKE); box.setStrokeWidth(1.5f * d);
-        err.setColor(0xFFFF8A65); err.setTextSize(10 * d);
+        err.setColor(Theme.ERR); err.setTextSize(10 * d);
         label.setTextSize(13 * d); label.setFakeBoldText(true); label.setTextAlign(Paint.Align.CENTER);
         glyph.setStyle(Paint.Style.STROKE); glyph.setStrokeWidth(1.5f * d);
-        rule.setColor(0x33FFFFFF);
+        rule.setColor(Theme.RULE);
+        setTypeface(Typeface.DEFAULT);
     }
 
     /** the display language's typeface ({@link UiFont}) */
     public void setTypeface(Typeface tf) {
-        head.setTypeface(tf); field.setTypeface(tf); err.setTypeface(tf); label.setTypeface(tf); legend.setTypeface(tf);
+        head.setTypeface(Theme.mono(tf)); field.setTypeface(Theme.mono(tf)); err.setTypeface(tf); label.setTypeface(Theme.mono(tf)); legend.setTypeface(tf);
         invalidate();
     }
 
@@ -59,15 +61,17 @@ public class KeyboardView extends View {
         float w = getWidth(), h = getHeight(), pad = 16 * d;
         float legTop = h - pad - legend.height(legend.lines(w - 2 * pad, hints)) + 2 * d;   // the legend, on as many lines as it needs
         c.drawRect(0, 0, w, h, bg);
+        Theme.scanlines(c, w, h, d, scan);
         c.drawText(title.toUpperCase(), pad, pad + 7 * d, head);
         float top = pad + 14 * d;
         c.drawLine(pad, top, w - pad, top, rule);
+        c.drawLine(pad, top + 2 * d, w - pad, top + 2 * d, rule);   // a double rule, as on a ledger
 
         // ---- the field
         float fy = top + 10 * d, fh = 32 * d;
-        r.set(pad, fy, w - pad, fy + fh); c.drawRoundRect(r, 4 * d, 4 * d, box);
+        r.set(pad, fy, w - pad, fy + fh); c.drawRoundRect(r, Theme.radius(d), Theme.radius(d), box);
         String text = entry.shown();
-        field.setColor(entry.isPlaceholder() ? 0x66FFFFFF : 0xFFFFFFFF);
+        field.setColor(entry.isPlaceholder() ? Theme.FAINT : Theme.PAPER);
         float base = fy + fh / 2 - (field.ascent() + field.descent()) / 2, tx = pad + 10 * d;
         c.drawText(text, tx, base, field);
         if (!entry.isPlaceholder()) {                           // the cursor after what is typed
@@ -88,9 +92,9 @@ public class KeyboardView extends View {
                 boolean on = row == entry.row() && col == entry.col();
                 float x = pad + col * cw;
                 r.set(x + gap / 2, y + gap / 2, x + cw - gap / 2, y + rh - gap / 2);
-                cell.setColor(on ? ACCENT : 0x26FFFFFF);
-                c.drawRoundRect(r, 4 * d, 4 * d, cell);
-                int ink = on ? INK : 0xFFFFFFFF;
+                cell.setColor(on ? ACCENT : Theme.CHIP);
+                c.drawRoundRect(r, Theme.radius(d), Theme.radius(d), cell);
+                int ink = on ? INK : Theme.PAPER;
                 label.setColor(ink); glyph.setColor(ink);
                 drawCell(c, NameEntry.cell(row, col), r.centerX(), r.centerY());
             }

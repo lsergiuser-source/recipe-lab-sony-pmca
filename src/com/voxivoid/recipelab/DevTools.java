@@ -141,6 +141,7 @@ final class DevTools {
             { Lang.t("about_firmware"), orShown(firmware) },
             { Lang.t("about_platform"), orShown(platform) },
             { Lang.t("about_source"), "github.com/voxivoid/recipe-lab-sony-pmca" },
+            { Lang.t("about_based"), "Recipe Lab by André Domingues" },   // GPL-3.0 section 7(b) term of the original
         };
     }
 
